@@ -1,0 +1,30 @@
+"DELETE FROM sevend.t_fee_order_connect WHERE order_no IN (SELECT order_no FROM sevend.t_loan_order_ok WHERE customer_id = %s);" % customer_id
+"DELETE FROM sevend.t_loan_order WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_loan_order_ok WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_repay_plan_order WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_repay_plan_merge WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_repay_ok_info WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_repay_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_interest_wallet WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_interest_wallet_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_interest_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_overdue_wallet_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_overdue_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_withhold_gateway_order WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_customer_quota_journal WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_bond_order WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_bond_water WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_loan_extension_detail WHERE customer_id = %s;" % customer_id
+"DELETE FROM sevend.t_loan_extension_fee_water WHERE customer_id = %s;" % customer_id
+"UPDATE sevend.t_customer_quota SET remaining_quota = whole_quota WHERE customer_id = %s;" % customer_id
+"UPDATE sevend.t_householder_quota SET remaining_quota = whole_quota, validity_date = ADDDATE(NOW(),interval 14 day) WHERE customer_id = %s ORDER BY id DESC LIMIT 1;" % customer_id
+"UPDATE sevend.t_customer_status SET credit_status = 'SUCCESS',credit_sub_status = 'READY_LOAN' WHERE customer_id = %s;" % customer_id
+"UPDATE sevend.t_customer_status_record SET `status` = 'SUCCESS' WHERE customer_id = %s AND current_flag = 1 AND biz_type = 'CREDIT_STATUS';" % customer_id
+"UPDATE sevend.t_customer_status_record SET `status` = 'READY_LOAN' WHERE customer_id = %s AND current_flag = 1 AND biz_type = 'CREDIT_SUB_STATUS';" % customer_id
+"DELETE FROM financial.t_overdue_wallet WHERE loan_order_no IN (SELECT loan_order_no FROM financial.t_loan_order WHERE customer_id = %s);" % customer_id
+"DELETE FROM financial.t_repay_detail WHERE repay_order_no IN (SELECT repay_order_no FROM financial.t_repay_order WHERE customer_id = %s);" % customer_id
+"DELETE FROM financial.t_repay_order WHERE customer_id = %s;" % customer_id
+"DELETE FROM financial.t_repay_plan_detail WHERE order_no IN (SELECT order_no FROM financial.t_repay_plan WHERE origin_order_no IN (SELECT loan_order_no FROM financial.t_loan_order WHERE customer_id = %s));" % customer_id
+"DELETE FROM financial.t_extra_fee_order_relation WHERE order_no IN (SELECT loan_order_no FROM financial.t_loan_order WHERE customer_id = %s);" % customer_id
+"DELETE FROM financial.t_repay_plan WHERE origin_order_no IN (SELECT loan_order_no FROM financial.t_loan_order WHERE customer_id = %s);" % customer_id
+"DELETE FROM financial.t_loan_order WHERE customer_id = %s;" % customer_id
